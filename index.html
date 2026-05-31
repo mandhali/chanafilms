@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Maninder Chana — Selected Work</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --black:#0c0a08;
+    --panel:#141110;
+    --panel2:#1b1714;
+    --gold:#c9a23f;
+    --gold-dim:#8a6f2e;
+    --red:#9e1b22;
+    --red-bright:#c4232b;
+    --cream:#ece3d0;
+    --muted:#8a8175;
+    --line:#2c2620;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--black);
+    color:var(--cream);
+    font-family:'Archivo',sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* ---------- grain + vignette atmosphere ---------- */
+  body::before{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:9999;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+    mix-blend-mode:overlay;
+  }
+
+  /* ---------- PASSWORD GATE ---------- */
+  #gate{
+    position:fixed;inset:0;z-index:1000;
+    background:radial-gradient(ellipse at 50% 35%, #1a1512 0%, #0c0a08 70%);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    padding:24px;text-align:center;
+  }
+  #gate .moon{
+    width:90px;height:90px;border-radius:50%;margin-bottom:34px;
+    background:radial-gradient(circle at 38% 35%, #f4e4b8 0%, #d9b96a 45%, #a8842f 100%);
+    box-shadow:0 0 70px rgba(201,162,63,.35), inset -10px -10px 26px rgba(120,80,20,.5);
+  }
+  #gate h1{
+    font-family:'Cormorant Garamond',serif;font-weight:900;font-size:clamp(28px,5vw,46px);
+    letter-spacing:.04em;color:var(--cream);margin-bottom:10px;
+  }
+  #gate p{color:var(--muted);font-size:14px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:36px}
+  #gate .row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+  #gate input{
+    background:#0c0a08;border:1px solid var(--line);color:var(--cream);
+    padding:14px 18px;font-family:'Archivo';font-size:15px;letter-spacing:.05em;
+    border-radius:2px;width:240px;outline:none;transition:border-color .25s;
+  }
+  #gate input:focus{border-color:var(--gold)}
+  #gate button{
+    background:var(--red);color:#fff;border:none;padding:14px 28px;
+    font-family:'Archivo';font-weight:600;font-size:14px;letter-spacing:.12em;
+    text-transform:uppercase;border-radius:2px;cursor:pointer;transition:background .25s;
+  }
+  #gate button:hover{background:var(--red-bright)}
+  #gateError{color:var(--red-bright);font-size:13px;letter-spacing:.08em;margin-top:18px;height:16px;opacity:0;transition:opacity .2s}
+  #gateError.show{opacity:1}
+
+  /* ---------- MAIN (hidden until unlocked) ---------- */
+  #site{display:none;opacity:0;transition:opacity .8s ease}
+  #site.reveal{display:block;opacity:1}
+
+  .wrap{max-width:1040px;margin:0 auto;padding:0 28px}
+
+  /* ---------- HERO ---------- */
+  header.hero{
+    padding:96px 0 60px;border-bottom:1px solid var(--line);
+    background:
+      radial-gradient(circle at 85% 10%, rgba(158,27,34,.10), transparent 40%),
+      radial-gradient(circle at 10% 90%, rgba(201,162,63,.07), transparent 40%);
+  }
+  .kicker{color:var(--gold);letter-spacing:.34em;text-transform:uppercase;font-size:12px;font-weight:600;margin-bottom:18px}
+  header.hero h1{
+    font-family:'Cormorant Garamond',serif;font-weight:900;
+    font-size:clamp(42px,8vw,86px);line-height:.95;letter-spacing:-.01em;color:var(--cream);
+  }
+  header.hero .role{
+    font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:400;
+    font-size:clamp(18px,3vw,26px);color:var(--gold);margin-top:14px;letter-spacing:.01em;
+  }
+  header.hero .lede{max-width:660px;margin-top:26px;color:#bdb3a2;font-size:17px}
+
+  /* ---------- REEL HERO BLOCK ---------- */
+  section.reel{padding:64px 0 20px}
+  .embed{
+    position:relative;width:100%;aspect-ratio:16/9;background:var(--panel2);
+    border:1px solid var(--line);border-radius:3px;overflow:hidden;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .embed iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+  .embed .placeholder{text-align:center;padding:30px;color:var(--muted)}
+  .embed .placeholder .ptag{color:var(--gold);letter-spacing:.2em;text-transform:uppercase;font-size:12px;font-weight:600;margin-bottom:10px}
+  .embed .placeholder .pbig{font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--cream);margin-bottom:8px}
+  .embed .placeholder code{background:#0c0a08;border:1px solid var(--line);padding:3px 8px;border-radius:3px;color:var(--gold);font-size:13px}
+
+  .sectionhead{display:flex;align-items:baseline;gap:18px;margin:72px 0 8px}
+  .sectionhead .num{font-family:'Cormorant Garamond',serif;color:var(--red-bright);font-size:18px;font-weight:600}
+  .sectionhead h2{
+    font-family:'Cormorant Garamond',serif;font-weight:600;font-size:clamp(24px,4vw,34px);color:var(--cream);letter-spacing:-.01em;
+  }
+  .sectionhead .line{flex:1;height:1px;background:linear-gradient(90deg,var(--gold-dim),transparent)}
+  .sectionsub{color:var(--muted);font-size:14px;letter-spacing:.04em;margin-bottom:30px}
+
+  /* ---------- WORK GRID ---------- */
+  .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+  @media(max-width:720px){.grid{grid-template-columns:1fr}}
+  .card{
+    background:linear-gradient(180deg,var(--panel),var(--panel2));
+    border:1px solid var(--line);border-radius:3px;padding:24px 24px 22px;
+    transition:transform .3s ease,border-color .3s ease;position:relative;overflow:hidden;
+  }
+  .card:hover{transform:translateY(-3px);border-color:var(--gold-dim)}
+  .card .tt{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--cream);font-weight:600;line-height:1.2}
+  .card .meta{color:var(--gold);font-size:12.5px;letter-spacing:.05em;text-transform:uppercase;margin:7px 0 12px;font-weight:600}
+  .card .desc{color:#a89e8e;font-size:14.5px}
+  .card .foot{margin-top:16px;display:flex;align-items:center;gap:12px}
+  .card a.btn{
+    color:var(--cream);border:1px solid var(--gold-dim);padding:7px 16px;border-radius:2px;
+    font-size:12px;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;font-weight:600;transition:.25s;
+  }
+  .card a.btn:hover{background:var(--gold);color:#0c0a08;border-color:var(--gold)}
+  .tag{font-size:11px;letter-spacing:.12em;text-transform:uppercase;padding:5px 11px;border-radius:2px;font-weight:600}
+  .tag.fest{background:rgba(158,27,34,.15);color:#e3868b;border:1px solid rgba(158,27,34,.4)}
+  .tag.req{background:rgba(201,162,63,.12);color:var(--gold);border:1px solid rgba(201,162,63,.35)}
+
+  /* ---------- NARRATIVE DIRECTION ---------- */
+  section.narrative{
+    margin-top:90px;padding:70px 0;border-top:1px solid var(--line);
+    background:radial-gradient(circle at 15% 0%, rgba(201,162,63,.05), transparent 45%);
+  }
+  .bridge{max-width:640px;color:#bdb3a2;font-size:16px;font-style:italic;font-family:'Cormorant Garamond',serif;margin-bottom:34px}
+  .credits{display:grid;grid-template-columns:1fr 1fr;gap:14px 40px;margin-top:30px}
+  @media(max-width:720px){.credits{grid-template-columns:1fr}}
+  .credit{border-left:2px solid var(--red);padding-left:16px}
+  .credit .cn{font-family:'Cormorant Garamond',serif;font-size:17px;color:var(--cream);font-weight:600}
+  .credit .cd{color:var(--muted);font-size:13px;letter-spacing:.03em;margin-top:2px}
+
+  /* ---------- FOOTER ---------- */
+  footer{border-top:1px solid var(--line);padding:54px 0 70px;text-align:center}
+  footer .fname{font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--cream);font-weight:600;letter-spacing:.02em}
+  footer .fcontact{color:var(--muted);font-size:14px;margin-top:12px;letter-spacing:.04em}
+  footer a{color:var(--gold);text-decoration:none}
+  footer a:hover{text-decoration:underline}
+
+  .reveal-stagger{opacity:0;transform:translateY(14px);animation:rise .7s ease forwards}
+  @keyframes rise{to{opacity:1;transform:translateY(0)}}
+
+  /* ---------- FEATURE (full-width embedded hero pieces) ---------- */
+  .feature{margin:28px 0 18px}
+  .feature .featmeta{margin-bottom:16px}
+  .feature .featmeta .tt{font-family:'Cormorant Garamond',serif;font-size:30px;color:var(--cream);font-weight:600;line-height:1.1}
+  .feature .featmeta .meta{color:var(--gold);font-size:12.5px;letter-spacing:.05em;text-transform:uppercase;margin:6px 0 10px;font-weight:600}
+  .feature .featmeta .desc{color:#a89e8e;font-size:15px;max-width:760px}
+  .feature.featured .embed{border-color:var(--gold-dim);box-shadow:0 0 0 1px rgba(201,162,63,.25),0 24px 50px rgba(0,0,0,.45)}
+
+  .card .btn.play{background:transparent;cursor:pointer;font-family:'Archivo';}
+  .card .btn.play:hover{background:var(--gold);color:#0c0a08;border-color:var(--gold)}
+
+  /* ---------- LIGHTBOX ---------- */
+  #lightbox{
+    position:fixed;inset:0;z-index:2000;display:none;
+    background:rgba(6,5,4,.92);backdrop-filter:blur(6px);
+    align-items:center;justify-content:center;padding:32px;
+  }
+  #lightbox.open{display:flex}
+  #lightbox .lbinner{width:min(1000px,100%);}
+  #lightbox .lbhead{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px;gap:20px}
+  #lightbox .lbtitle{font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--cream)}
+  #lightbox .lbclose{
+    background:none;border:1px solid var(--line);color:var(--cream);width:40px;height:40px;border-radius:50%;
+    font-size:20px;cursor:pointer;flex-shrink:0;transition:.2s;line-height:1;
+  }
+  #lightbox .lbclose:hover{border-color:var(--red-bright);color:var(--red-bright)}
+  #lightbox .lbframe{position:relative;width:100%;aspect-ratio:16/9;background:#000;border:1px solid var(--line);border-radius:3px;overflow:hidden}
+  #lightbox .lbframe iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+  #lightbox .lbnote{text-align:center;color:var(--muted);font-size:14px;padding:40px 20px}
+  #lightbox .lbnote code{background:#0c0a08;border:1px solid var(--line);padding:3px 8px;border-radius:3px;color:var(--gold)}
+</style>
+</head>
+<body>
+
+<!-- ===================== PASSWORD GATE ===================== -->
+<div id="gate">
+  <div class="moon"></div>
+  <h1>Maninder Chana</h1>
+  <p>Selected Work — By Invitation</p>
+  <div class="row">
+    <input id="pw" type="password" placeholder="Enter access code" autocomplete="off"
+           onkeydown="if(event.key==='Enter')tryUnlock()">
+    <button onclick="tryUnlock()">Enter</button>
+  </div>
+  <div id="gateError">Incorrect code. Try again.</div>
+</div>
+
+<!-- ===================== SITE ===================== -->
+<div id="site">
+
+  <header class="hero">
+    <div class="wrap">
+      <div class="kicker reveal-stagger" style="animation-delay:.05s">Generative AI Producer · Director · Writer</div>
+      <h1 class="reveal-stagger" style="animation-delay:.12s">Maninder<br>Chana</h1>
+      <div class="role reveal-stagger" style="animation-delay:.2s">Two decades of narrative direction — now driving an end-to-end AI content pipeline.</div>
+      <p class="lede reveal-stagger" style="animation-delay:.28s">Award-winning writer-director with two theatrical features and credits across CBC, Lifetime, Amazon and E!, producing 100+ generative-AI pieces spanning long-form narrative, music videos and children's content. A filmmaker's eye, applied to the current AI stack.</p>
+    </div>
+  </header>
+
+  <main class="wrap">
+
+    <!-- ============ AI REEL HERO ============ -->
+    <section class="reel">
+      <div class="sectionhead" style="margin-top:0">
+        <span class="num">01</span><h2>The Reel</h2><span class="line"></span>
+      </div>
+      <p class="sectionsub">Start here.</p>
+      <div class="embed">
+        <iframe src="https://player.vimeo.com/video/1197188274?h=46d7130f44&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen title="AI Reel"></iframe>
+      </div>
+    </section>
+
+    <!-- ============ FILM & LONG-FORM ============ -->
+    <div class="sectionhead">
+      <span class="num">02</span><h2>Film &amp; Long-Form Narrative</h2><span class="line"></span>
+    </div>
+    <p class="sectionsub">Cinematic world-building and sustained story.</p>
+
+    <!-- LOCKS — full embedded player -->
+    <div class="feature">
+      <div class="featmeta">
+        <div class="tt">LOCKS — Pitch Trailer</div>
+        <div class="meta">Dark Epic Fantasy · In Progress</div>
+        <div class="desc">Action-driven sequence design building a sustained cinematic world from script to screen via Seedance. A single character held consistent across a full chase sequence.</div>
+      </div>
+      <div class="embed">
+        <iframe src="https://player.vimeo.com/video/1143217798?h=fb4e2b3c18&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen title="LOCKS"></iframe>
+      </div>
+    </div>
+
+    <!-- Mille Bisous — featured full embedded player -->
+    <div class="feature featured">
+      <div class="featmeta">
+        <div class="meta" style="color:var(--red-bright);margin-top:0">★ Featured Work</div>
+        <div class="tt">Mille Bisous</div>
+        <div class="meta">Documentary-Hybrid Short · Coquine</div>
+        <div class="desc">Period-styled 1960s yé-yé aesthetic with consistent character identity across a long-form narrative cut — the strongest piece in the body of work to date. Storytelling first; the look follows.</div>
+      </div>
+      <div class="embed">
+        <iframe src="https://player.vimeo.com/video/1144415561?h=e045abcc87&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen title="MILLE BISOUS: A Thousand Kisses That Refused to Die"></iframe>
+      </div>
+    </div>
+
+    <!-- ============ MUSIC VIDEOS ============ -->
+    <div class="sectionhead">
+      <span class="num">03</span><h2>Music Videos</h2><span class="line"></span>
+    </div>
+    <p class="sectionsub">Character-led concepts, executed end to end.</p>
+    <div class="grid">
+
+      <div class="card" data-embed="https://player.vimeo.com/video/1197188778?h=f72e14bd53&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" data-title="Antifa Girl">
+        <div class="tt">Antifa Girl</div>
+        <div class="meta">Mr. Singh &amp; the Sassy Sardarnis · Biggest Release</div>
+        <div class="desc">Highest-performing video in the catalogue — a character-driven concept carried from idea to final cut.</div>
+        <div class="foot"><button class="btn play">▶ Play</button></div>
+      </div>
+
+      <div class="card" data-embed="https://player.vimeo.com/video/1168587262?h=4f3e81ce79&amp;title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" data-title="Crawling Back From Death">
+        <div class="tt">Crawling Back From Death</div>
+        <div class="meta">M. Chana · Black-&amp;-White Narrative</div>
+        <div class="desc">A near-death experience rendered in stark black and white — a reflection on learning to take chances instead of playing it safe. The monochrome palette held consistent across the cut.</div>
+        <div class="foot"><button class="btn play">▶ Play</button></div>
+      </div>
+
+      <div class="card" data-embed="https://player.vimeo.com/video/1197195821?h=45eb157022&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" data-title="Aria">
+        <div class="tt">Aria</div>
+        <div class="meta">Neon Chai · 1980s Aesthetic</div>
+        <div class="desc">1980s synth-era visual styling — neon, grain and period detail held convincingly across the piece. Genre range on demand.</div>
+        <div class="foot"><button class="btn play">▶ Play</button></div>
+      </div>
+
+      <div class="card" data-embed="https://player.vimeo.com/video/1197148567?h=dfd53872da&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" data-title="Crie!">
+        <div class="tt">Crie!</div>
+        <div class="meta">Coquine · 1960s Yé-Yé Aesthetic</div>
+        <div class="desc">1960s French yé-yé styling — period wardrobe, palette and character identity maintained throughout. A second distinct era, proving deliberate genre versatility.</div>
+        <div class="foot"><button class="btn play">▶ Play</button></div>
+      </div>
+
+      <div class="card" data-embed="https://player.vimeo.com/video/1142926470?h=b20f6a3732&amp;title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" data-title="Hey, Father Christmas">
+        <div class="tt">Hey, Father Christmas</div>
+        <div class="meta">Mr. Singh &amp; the Sassy Sardarnis · Action / Slow-Motion</div>
+        <div class="desc">A festive action piece — Mr. Singh saves Christmas — built around choreographed action beats and controlled slow-motion. Speed-ramping held clean through the motion, one of the harder things to pull off in AI video.</div>
+        <div class="foot"><button class="btn play">▶ Play</button></div>
+      </div>
+
+    </div>
+
+    <!-- ============ CHILDREN'S ============ -->
+    <div class="sectionhead">
+      <span class="num">04</span><h2>Children's &amp; Educational</h2><span class="line"></span>
+    </div>
+    <p class="sectionsub">Bright, safe, age-appropriate — built to a kids-content standard.</p>
+    <div class="grid">
+
+      <div class="card" data-embed="https://player.vimeo.com/video/1100917318?h=5fbf57c497&amp;title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" data-title="Shape Safari">
+        <div class="tt">Shape Safari</div>
+        <div class="meta">Children's Music Video</div>
+        <div class="desc">Bright, safe animation style developed under a kids-content content-safety standard.</div>
+        <div class="foot"><button class="btn play">▶ Play</button></div>
+      </div>
+
+      <div class="card" data-embed="https://player.vimeo.com/video/1197079522?h=33cf62b5c6&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" data-title="Five Senses">
+        <div class="tt">Five Senses</div>
+        <div class="meta">Children's TV-Show Pitch</div>
+        <div class="desc">Series concept and look developed for pitch; an educational format for young audiences.</div>
+        <div class="foot"><button class="btn play">▶ Play</button></div>
+      </div>
+
+    </div>
+
+    <!-- ============ TECHNICAL SHOWCASE ============ -->
+    <div class="sectionhead">
+      <span class="num">05</span><h2>Technical Showcase</h2><span class="line"></span>
+    </div>
+    <p class="sectionsub">The hard consistency problems, solved.</p>
+    <div class="grid">
+      <div class="card" data-embed="https://player.vimeo.com/video/1118302333?h=74c2a90c80&amp;title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" data-title="Raga Ma">
+        <div class="tt">Raga Ma — Singh Sound Syndicate</div>
+        <div class="meta">Extended Single-Take Sitar Piece · ~11 Minutes</div>
+        <div class="desc">Sustained, seamless long-form generation engineered to read as one continuous take — among the toughest consistency challenges in AI video, executed clean.</div>
+        <div class="foot"><button class="btn play">▶ Play</button></div>
+      </div>
+
+      <div class="card" data-embed="https://player.vimeo.com/video/1148766634?h=c4f994ba5d&amp;title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" data-title="Raga Pa">
+        <div class="tt">Raga Pa — Singh Sound Syndicate</div>
+        <div class="meta">Dance &amp; Movement · Macro Photography</div>
+        <div class="desc">Choreographed motion and tight macro-lens detail held coherent across the cut — two of the hardest things to keep consistent in AI video, executed together.</div>
+        <div class="foot"><button class="btn play">▶ Play</button></div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ============ NARRATIVE DIRECTION ============ -->
+  <section class="narrative">
+    <div class="wrap">
+      <div class="sectionhead" style="margin-top:0">
+        <span class="num">06</span><h2>Narrative Direction — Film &amp; Television</h2><span class="line"></span>
+      </div>
+      <p class="bridge">Two decades of narrative direction inform every frame of the AI work above. The eye is the same; only the tools have changed.</p>
+
+      <div class="embed" style="margin-bottom:14px">
+        <iframe src="https://player.vimeo.com/video/798487002?h=3bdd76ea12&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen title="Maninder Chana — Director's Reel"></iframe>
+      </div>
+
+      <div class="credits">
+        <div class="credit"><div class="cn">Little Terrors</div><div class="cd">Writer/Director · Feature, Theatrical · Best Film &amp; Best Director wins</div></div>
+        <div class="credit"><div class="cn">Scratch</div><div class="cd">Writer/Director · Feature · 30 intl. awards (11 Best Film)</div></div>
+        <div class="credit"><div class="cn">Cell 213</div><div class="cd">Writer · Feature, Theatrical · w/ Michael Rooker, Bruce Greenwood</div></div>
+        <div class="credit"><div class="cn">Hit Kick Punch Kill</div><div class="cd">Writer · Feature · Storyboard Media · dir. RZA</div></div>
+        <div class="credit"><div class="cn">Bollywed S1 &amp; S2</div><div class="cd">Director / Sr. Story Producer / Writer · CBC</div></div>
+        <div class="credit"><div class="cn">Run the Burbs</div><div class="cd">Story Editor · CBC · 13 episodes</div></div>
+        <div class="credit"><div class="cn">Funcle · The Good News</div><div class="cd">Creator / Showrunner · In development</div></div>
+        <div class="credit"><div class="cn">Arranged Love</div><div class="cd">Writer · Feature · MarVista / E!</div></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <div class="fname">Maninder Chana</div>
+      <div class="fcontact">
+        Toronto, ON · <a href="mailto:maninderchana@gmail.com">maninderchana@gmail.com</a> · 416.988.5925<br>
+        Rep: Jennifer Irons, Meta Talent Agency
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<!-- ===================== LIGHTBOX ===================== -->
+<div id="lightbox" onclick="if(event.target===this)closeLightbox()">
+  <div class="lbinner">
+    <div class="lbhead">
+      <div class="lbtitle" id="lbTitle">—</div>
+      <button class="lbclose" onclick="closeLightbox()" aria-label="Close">×</button>
+    </div>
+    <div class="lbframe" id="lbFrame"></div>
+  </div>
+</div>
+
+<script>
+  // ---- SOFT password gate ----
+  // NOTE: this deters casual visitors only. It is NOT real security —
+  // anyone technical can read this code. Protect festival pieces at the
+  // video host (Vimeo password / unlisted) or leave them "on request".
+  var ACCESS_CODE = "mooncollective";   // <-- change this to whatever you want
+
+  function tryUnlock(){
+    var val = document.getElementById('pw').value.trim().toLowerCase();
+    var err = document.getElementById('gateError');
+    if(val === ACCESS_CODE){
+      document.getElementById('gate').style.display = 'none';
+      var site = document.getElementById('site');
+      site.classList.add('reveal');
+      site.style.display = 'block';
+    } else {
+      err.classList.add('show');
+      document.getElementById('pw').value = '';
+    }
+  }
+
+  // ---- LIGHTBOX ----
+  // Each lightbox card carries data-embed (the player URL) and data-title.
+  // Fill data-embed with the EMBED url, e.g.:
+  //   YouTube:  https://www.youtube.com/embed/VIDEO_ID
+  //   Vimeo:    https://player.vimeo.com/video/VIDEO_ID
+  // Leave data-embed empty and the lightbox shows a friendly "coming soon" note.
+  function openLightbox(url, title){
+    var frame = document.getElementById('lbFrame');
+    document.getElementById('lbTitle').textContent = title || '';
+    if(url && url.trim()){
+      frame.innerHTML = '<iframe src="'+url+'" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>';
+    } else {
+      frame.innerHTML = '<div class="lbnote">Embed link not set yet.<br><br>Add this video\'s URL to its <code>data-embed</code> attribute in the page source.</div>';
+    }
+    document.getElementById('lightbox').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox(){
+    document.getElementById('lightbox').classList.remove('open');
+    document.getElementById('lbFrame').innerHTML = '';   // stops playback
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeLightbox(); });
+
+  // Wire every .play button to its parent card's data attributes
+  document.querySelectorAll('.card .btn.play').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var card = btn.closest('.card');
+      openLightbox(card.getAttribute('data-embed'), card.getAttribute('data-title'));
+    });
+  });
+</script>
+
+</body>
+</html>
